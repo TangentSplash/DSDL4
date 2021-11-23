@@ -9,31 +9,45 @@ module keypad_interpreter(
 
     //Keypad Values
     localparam [4:0] EQUALS = 5'b00100;
-    localparam [3:0] ADDKEY= 4'b1011;
-    localparam [3:0] MULTKEY =4'b1011;
+    localparam [4:0] ADDKEY= 5'b01010;
+    localparam [4:0] MULTKEY = 5'b00010;
+    localparam [4:0] SUBKEY = 5'b00011;
 
     //Output Values
     localparam ADD =2'b00;
     localparam MULTIPLY = 2'b01 ;
+    localparam SUBTRACT = 2'b10;
 
     always @ (newkey)
     begin
         //Start as zero
+        // ====== Binary 1 bit Outputs ======
         eq <= 1'b0;
         newhex <= 1'b0;
         newop <= 1'b0;
 
         if (kecode == EQUALS)
             eq <= 1'b1;
-        else if (keycode[3])
+        else if (keycode[4]) // all keycodes begin with a 1
             newhex <= 1'b1;
         else
             newop <= 1'b1;
 
-        case (keycode[3:0])
+        // ====== Opcode Output Control ======
+        
+        case (keycode[4:0])
             ADDKEY:     opcode <= ADD;
             MULTKEY:    opcode <= MULTIPLY;
-            default:    opcode <= 2'b11;
+            SUBKEY:     opcode <= SUBTRACT;
+            default:    opcode <= 2'b00; // addition is default
         endcase
+        
+        // ====== Hexidecimal Output Control ======
+        
+        if (keycode[4])
+            hexcode <= keycode[3:0];
+        else    
+            hexcode <= 4'b0000
+            
     end
 endmodule
