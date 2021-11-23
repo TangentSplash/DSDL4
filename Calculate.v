@@ -50,12 +50,17 @@ module Registers(
         end
 
     //V1 Register
+    always @ (eq | new_hex)
+    begin 
+        V1next <= V1curr
+    end
+
+    //V1
     always @ (V1curr)
         begin
-            if (eq)                 V1next <= ans;
-            else if (FLOWMODEcurr && newhex)  V1next <= overwrite; // only overwrite if we get a new char
-            else if (!FLOWMODEcurr && newhex) V1next <= {V1curr[11:0], hexcode}; // shift left
-            else                    V1next <= V1curr;
+            if (eq)                             V1next <= ans;
+            else if (FLOWMODEcurr && newhex)    V1next <= overwrite; // only overwrite if we get a new char
+            else                                V1next <= {V1curr[11:0], hexcode}; // shift left
         end
 
     //V2 Register
@@ -63,6 +68,7 @@ module Registers(
         begin
             V2next <= V2curr
         end 
+
     //V2
     always @ (V2curr)
         begin
