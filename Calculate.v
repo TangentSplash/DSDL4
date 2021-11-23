@@ -7,11 +7,11 @@ module Registers(
     input [3:0] hexcode,    // The hexidecimal number currently pressed
     input newop,            // High when an operator is pressed
     input [1:0] opcode, 	// Operator currently being pressed
-    input eq
+    input eq                // Equals is currently being pressed
     input [15:0] ans,
     output [15:0] V1_reg,
     output [15:0] V2_reg
-    );              // Equals is currently being pressed
+    );              
 
     reg [15:0] V1curr, V1next, V2curr, V2next;  
     reg FLOWMODEcurr, FLOWMODEnext;
