@@ -1,7 +1,7 @@
 module keypad_interpreter(
     input newkey,			// High for one cycle during each new keypress
     input [4:0] keycode, 	// Key pressed
-    output newhex.          // High when a hexidecimal number is pressed
+    output newhex,          // High when a hexidecimal number is pressed
     output [3:0] hexcode,   // The hexidecimal number currently pressed
     output newop,            // High when an operator is pressed
     output[1:0] opcode, 	// Operator currently being pressed
