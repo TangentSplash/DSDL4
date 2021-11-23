@@ -76,12 +76,4 @@ module Registers(
             else                V2next <=V2curr;
         end
 
-    assign add = V1curr+V2curr;
-    assign multiply = V1curr*V2curr;
-    
-    always @ (V1curr, V2curr)
-        case (operator)
-            2'b0: ans <= add;
-            2'b01: ans <= multiply;
-        endcase
 endmodule
