@@ -16,7 +16,7 @@ module Registers(
     reg [15:0] V1curr, V1next, V2curr, V2next;  
     reg FLOWMODEcurr, FLOWMODEnext;
 
-    wire [15:0] overwrite <= {12'b000000000000, hexcode};
+    wire [15:0] overwrite = {12'b000000000000, hexcode};
     
     // Reset condition
     
@@ -52,7 +52,7 @@ module Registers(
     //V1 Register
     always @ (eq | new_hex)
     begin 
-        V1next <= V1curr
+        V1next <= V1curr;
     end
 
     //V1
@@ -66,7 +66,7 @@ module Registers(
     //V2 Register
     always @ (newop)
         begin
-            V2next <= V2curr
+            V2next <= V2curr;
         end 
 
     //V2
