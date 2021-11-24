@@ -47,7 +47,7 @@ module keypad_interpreter(
         if (keycode[4])
             hexcode <= keycode[3:0];
         else    
-            hexcode <= 4'b0000
+            hexcode <= 4'b0000;
             
     end
 endmodule

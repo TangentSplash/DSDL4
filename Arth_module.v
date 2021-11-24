@@ -25,9 +25,7 @@ module Arth_module(
         end
 
         if (newop)
-        {
             operator_next <= opcode;
-        }
     end
 
     assign add = V1curr+V2curr;
