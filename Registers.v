@@ -8,12 +8,12 @@ module Registers(
     input newop,            // High when an operator is pressed
     input [1:0] opcode, 	// Operator currently being pressed
     input eq,               // Equals is currently being pressed
-    input [15:0] ans,
-    output [15:0] V1_reg,
-    output [15:0] V2_reg
+    input signed [15:0] ans,
+    output signed [15:0] V1_reg,
+    output signed [15:0] V2_reg
     );              
 
-    reg [15:0] V1curr, V1next, V2curr, V2next;  
+    reg signed [15:0] V1curr, V1next, V2curr, V2next;  
     reg FLOWMODEcurr, FLOWMODEnext;
 
     wire [15:0] overwrite <= {12'b000000000000, hexcode};
