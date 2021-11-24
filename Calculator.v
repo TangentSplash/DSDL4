@@ -1,8 +1,4 @@
 //Main module
-`include "Arth_module.v"
-`include "KeypadInterpreter.v"
-`include "Registers.v"
-
 module Calculator(
     input clock,
     input reset,

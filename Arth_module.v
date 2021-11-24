@@ -7,13 +7,12 @@ module Arth_module(
     input [3:0] V2,
     input [1:0] opcode,           
     input newop,
-    output reg unsigned [15:0] ans);
+    output reg [15:0] ans);
 
     reg [1:0] operator_curr,operator_next;  
 
-    signed [15:0] add, subtract;
-    signed [15:0] V1_signed, V2_signed;
-    unsigned [15:0] multiply;   //Multiplication of sign and magnitude is much easier
+    wire signed [15:0] add, subtract,V1_signed, V2_signed;
+    wire [15:0] multiply;   //Multiplication of sign and magnitude is much easier
 
     assign V1_signed=$signed(V1);
     assign V2_signed=$signed(V2);
@@ -34,7 +33,7 @@ module Arth_module(
     end
 
     assign add = V1signed+V2signed;
-    assign subtract V2_signed-V1_signed;
+    assign subtract = V2_signed-V1_signed;
     assign multiply = V1*V2;
     
     always @ (V1, V2)

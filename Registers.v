@@ -1,31 +1,25 @@
-// Registers Module contains
-
 module Registers(
     input clock,
     input reset,
     input newhex,           // High when a hexidecimal number is pressed
     input [3:0] hexcode,    // The hexidecimal number currently pressed
     input newop,            // High when an operator is pressed
-    input [1:0] opcode, 	// Operator currently being pressed
     input eq,               // Equals is currently being pressed
-    input [15:0] ans,
-    output [15:0] V1_reg,
-    output [15:0] V2_reg
+    input signed [15:0] answer,
+  output signed [15:0] V1curr,
+  output signed [15:0] V2curr
     );              
 
-    reg [15:0] V1curr, V1next, V2curr, V2next;  
+  reg signed [15:0] /*V1curr,*/ V1next, /*V2curr,*/ V2next;  
     reg FLOWMODEcurr, FLOWMODEnext;
 
-    wire [15:0] overwrite = {12'b000000000000, hexcode};
+    wire [15:0] overwrite;
+    assign overwrite = {12'd0, hexcode};
     
     // Reset condition
-    
-    wire [15:0] ans, overwrite, shifteddigits;
-
-    assign shifteddigits = {V1curr[11:0],newhex};
-    assign overwrite = {12'b0,newhex};
 
     always @ (posedge clock)
+    begin   
         if (reset)
             begin   
                 V1curr <= 16'h0000;
@@ -37,10 +31,12 @@ module Registers(
                V1curr <= V1next;
                V2curr <= V2next;
                FLOWMODEcurr <= FLOWMODEnext;
-               V1_reg <= V1curr; // Output will go to arith and display
-               V2_reg <= V2curr; // Output will go to arithmetic block
-            end
+            end    
+     end 
 
+     //assign V1_reg = V1curr; // Output will go to arith and display
+     //assign V2_reg = V2curr; // Output will go to arithmetic block
+    
     //Flow Mode Module
     always @ (FLOWMODEcurr)
         begin
@@ -50,24 +46,24 @@ module Registers(
         end
 
     //V1 Register
-    always @ (eq | new_hex)
-    begin 
+    //always @ (eq | newhex)
+   /* begin 
         V1next <= V1curr;
-    end
+    end*/
 
     //V1
     always @ (V1curr)
         begin
-            if (eq)                             V1next <= ans;
+            if (eq)                             V1next <= answer;
             else if (FLOWMODEcurr && newhex)    V1next <= overwrite; // only overwrite if we get a new char
             else                                V1next <= {V1curr[11:0], hexcode}; // shift left
         end
 
     //V2 Register
-    always @ (newop)
+   /* always @ (newop)
         begin
             V2next <= V2curr;
-        end 
+        end */
 
     //V2
     always @ (V2curr)
@@ -75,5 +71,8 @@ module Registers(
             if (newhex | eq)    V2next <= V1curr;
             else                V2next <=V2curr;
         end
+  
+  //assign V1_reg = V1curr;
+  //assign V2_reg = V2curr;
 
 endmodule
