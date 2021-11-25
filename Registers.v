@@ -5,6 +5,7 @@ module Registers(
     input [3:0] hexcode,    // The hexidecimal number currently pressed
     input newop,            // High when an operator is pressed
     input eq,               // Equals is currently being pressed
+    input BS,               // Backspace key
     input signed [15:0] answer,
   output reg signed [15:0] V1curr,
   output reg signed [15:0] V2curr
@@ -56,6 +57,7 @@ module Registers(
         begin
             if (eq)                             V1next <= answer;
             else if (FLOWMODEcurr && newhex)    V1next <= overwrite; // only overwrite if we get a new char
+            else if (BS)                        V1next <= {4'b0, V1curr[15:4]}; // shift right is backspace
             else                                V1next <= {V1curr[11:0], hexcode}; // shift left
         end
 
