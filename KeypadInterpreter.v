@@ -5,14 +5,17 @@ module keypad_interpreter(
     output reg [3:0] hexcode,   // The hexidecimal number currently pressed
     output reg newop,            // High when an operator is pressed
     output reg [1:0] opcode, 	// Operator currently being pressed
-    output  reg eq);             // Equals is currently being pressed
+    output reg eq,
+    output reg BS
+    );             // Equals is currently being pressed
 
     //Keypad Values
     localparam [4:0] EQUALS = 5'b00100;
     localparam [4:0] ADDKEY= 5'b01010;
     localparam [4:0] MULTKEY = 5'b00010;
     localparam [4:0] SUBKEY = 5'b00011;
-
+    localparam [4:0] BACKSPACE = 5'b00001;
+    
     //Output Values
     localparam ADD =2'b00;
     localparam MULTIPLY = 2'b01 ;
@@ -27,6 +30,11 @@ module keypad_interpreter(
          else
              eq = 1'b0;
          
+        if ((keycode == 5'b00001) && newkey)
+             BS = 1'b1;
+         else
+             BS = 1'b0;
+        
          if(newkey)
          begin 
             if (keycode[4])
