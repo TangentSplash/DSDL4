@@ -1,8 +1,4 @@
 //Main module
-`include "Arth_module.v"
-`include "KeypadInterpreter.v"
-`include "Registers.v"
-
 module Calculator(
     input clock,
     input reset,
@@ -16,6 +12,6 @@ wire [1:0] opcode;
 wire [15:0] ans,V1,V2;
 
 keypad_interpreter keypad_interpreter(.newkey(newkey),.keycode(keycode),.newhex(newhex),.hexcode(hexcode),.newop(newop),.opcode(opcode),.eq(eq));
-Regisers registers(.clock(clock),.reset(reset),.newhex(newhex),.hexcode(hexcode),.newop(newop),.opcode(opcode),.eq(eq),.ans(ans),.V1_reg(V1),.V2_reg(V2));
+Registers calcregisters(.clock(clock),.reset(reset),.newhex(newhex),.hexcode(hexcode),.newop(newop),.eq(eq),.answer(ans),.V1curr(V1),.V2curr(V2));
   Arth_module arethmeic(.clock(clock),.reset(reset),.V1(V1),.V2(V2),.opcode(opcode),.newop(newop),.ans(ans));
 endmodule

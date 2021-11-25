@@ -20,11 +20,11 @@ module Arth_module(
     begin
         if (reset)
         begin
-            opperator_curr <= 2'b00;
+            operator_curr <= 2'b00;
         end 
         else 
         begin
-            operator_curr <= opperator_next;
+            operator_curr <= operator_next;
         end
 
         if (newop)
