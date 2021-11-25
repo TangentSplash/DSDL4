@@ -21,23 +21,23 @@ module Arth_module(
     begin
         if (reset)
         begin
-            opperator_curr <= 2'b00;
+            operator_curr <= 2'b00;
         end 
         else 
         begin
-            operator_curr <= opperator_next;
+            operator_curr <= operator_next;
         end
 
         if (newop)
             operator_next <= opcode;
     end
 
-    assign add = V1signed+V2signed;
+    assign add = V1_signed+V2_signed;
     assign subtract = V2_signed-V1_signed;
     assign multiply = V1*V2;
     
     always @ (V1, V2)
-        case (operator)
+        case (operator_curr)
             2'b0: ans <= $unsigned(add);
             2'b01: ans <= multiply;
             2'b10: ans <= $unsigned(subtract);

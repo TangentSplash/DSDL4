@@ -6,8 +6,8 @@ module Registers(
     input newop,            // High when an operator is pressed
     input eq,               // Equals is currently being pressed
     input signed [15:0] answer,
-  output signed [15:0] V1curr,
-  output signed [15:0] V2curr
+  output reg signed [15:0] V1curr,
+  output reg signed [15:0] V2curr
     );              
 
   reg signed [15:0] /*V1curr,*/ V1next, /*V2curr,*/ V2next;  
