@@ -6,16 +6,16 @@ module Registers(
     input		     newop, // High when an operator is pressed
     input		     eq, // Equals is currently being pressed
     input		     BS, // Backspace key
-    input signed [15:0]	     answer,
-    output reg signed [15:0] V1curr,
-    output reg signed [15:0] V2curr
+    input signed [16:0]	     answer,        //Sign and magnitude
+    output reg signed [16:0] V1curr,        //Sign and magnitude
+    output reg signed [16:0] V2curr         //Sign and magnitude
     );              
 
-   reg signed [15:0]	     V1next, V2next;  
+   reg signed [16:0]	     V1next, V2next;   //Sign and magnitude
    reg			     FLOWMODEcurr, FLOWMODEnext;
 
-   wire [15:0]		     overwrite;
-   assign overwrite = {12'd0, hexcode};
+   wire [16:0]		     overwrite;
+   assign overwrite = {13'd0, hexcode};
     
    // Reset condition
 
@@ -23,8 +23,8 @@ module Registers(
      begin   
         if (reset)
           begin   
-             V1curr <= 16'h0000;
-             V2curr <= 16'h0000;
+             V1curr <= 17'h0000;
+             V2curr <= 17'h0000;
              FLOWMODEcurr <=1'b0;
           end 
         else 
@@ -49,7 +49,7 @@ module Registers(
         if (eq)                             V1next <= answer;
         else if (FLOWMODEcurr && newhex)    V1next <= overwrite; // only overwrite if we get a new char
         else if (BS)                        V1next <= {4'b0, V1curr[15:4]}; // shift right is backspace
-        else                                V1next <= {V1curr[11:0], hexcode}; // shift left
+        else                                V1next <= {V1curr[16],V1curr[11:0], hexcode}; // shift left
      end
   
    // V2 Instructions
