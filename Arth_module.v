@@ -15,7 +15,9 @@ module Arth_module(
     
     wire [16:0] multiply;   //Multiplication of sign and magnitude is much easier
 
-    wire ovwa,ovwm,ovws;
+    wire ovwa,ovws;
+    wire [16:0] multextra;
+    wire ovwm = |multextra;
     
      wire signed [16:0] nadd, nsubtract;
     
@@ -28,6 +30,7 @@ module Arth_module(
         if (reset)
         begin
             operator_curr <= 2'b00;
+            operator_next <= 2'b00;
         end 
         else 
         begin
@@ -45,10 +48,10 @@ module Arth_module(
     assign nsubtract = -subtract;
     assign ovws=((V1_2c[16]&!V2_2c[16])&(add[16])) || ((!V1_2c[16]&V2_2c[16])&add[16]);  //Subtraction overflow if subtract a negative from a positive and get a negative, or subtract a positive from a negative and get a positive 
     
-    assign {ovwm,multiply[15:0]}=V1[15:0]*V2[15:0];     //Multiply the magnitudes
+    assign {multextra,multiply[15:0]}=V1[15:0]*V2[15:0];     //Multiply the magnitudes
     assign multiply[16]=V1[16]^V2[16];                  //XOR the sign bits
     
-    always @ (V1, V2,operator_curr) 
+    always @ (V1, V2,operator_curr,add,subtract,multiply) 
         case (operator_curr)    //Answer depends on the selected operator
             2'b00: 
             begin 

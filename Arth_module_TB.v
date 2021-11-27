@@ -6,7 +6,7 @@ module TB_Arth_module;
 	reg [1:0] opcode;
 	// Outputs from module being verified
 	wire ovw;
-	wire [15:0] answer;
+	wire [16:0] answer;
 	// Instantiate module
 	Arth_module uut (
 		.clock(clock),
