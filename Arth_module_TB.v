@@ -2,7 +2,7 @@
 module TB_Arth_module;
 	// Inputs to module being verified
 	reg clock, reset, newop;
-	reg [15:0] V1, V2;
+	reg [16:0] V1, V2;
 	reg [1:0] opcode;
 	// Outputs from module being verified
 	wire ovw;
@@ -30,34 +30,36 @@ module TB_Arth_module;
 		begin
 			reset = 1'b1;
 			V1 = 16'd0;
-			V2 = 16'd0;
-			opcode = 2'b0;
+			V2 = 16'b1000000000000010;
+			opcode = 2'b00;
 			newop = 1'b0;
-			#100
+			#250
 			reset = 1'b0;
 			newop=1'b1;
-			V1 = 16'd0;
-			#100
-			V2 = 16'd170;
+			V1 = 16'b0100000000000000;
+			#250
+			V2 = 16'b110000001010000;
 			newop=1'b0;
 			#100
-			V1 = -16'd15;
+			V1 = 16'd15;
 			#200
-			opcode = 2'b01;
-			newop=1'b1;
+			V1=-16'd90;
 			#400
-			newop = 1'b0;
+			V2 = 16'd200;
 			#100
 			V1 = 16'd14;
 			#1300
-			newop = 1'b0;
+			newop = 1'b1;
+			opcode=2'b01;
 			#800
+			newop = 1'b0;
 			V2 = 16'd13;
 			#3300
 			V1 = 16'd17;
 			#1600
 			V2 = -16'd20;
-			#9700
+			#1000
+			opcode=2'b10;
 			newop = 1'b1;
 			#1300
 			newop = 1'b0;

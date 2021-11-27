@@ -12,16 +12,16 @@ module Arth_module(
 
     wire signed [16:0] add, subtract;
     wire signed [16:0] V1_2c,V2_2c;
-    //wire [15:0] V1_unsigned, V2_unsigned;
+    
     wire [16:0] multiply;   //Multiplication of sign and magnitude is much easier
 
     wire ovwa,ovwm,ovws;
     
      wire signed [16:0] nadd, nsubtract;
     
-    //Convert to 2's complement by checking sign bit, if it is 1 take the number to be minus the unsigned magnitude, otherwise take the unsigned magnitude
-    assign V1_2c = V1[16] ? -$unsigned(V1[15:0]) : $unsigned(V1[15:0]);     
-    assign V2_2c = V2[16] ? -$unsigned(V2[15:0]) : $unsigned(V2[15:0]); 
+    //Convert to 2's complement by checking sign bit, if it is 1 take the number to be minus the unsigned magnitude, otherwise take the unsigned magnitude    
+    assign V1_2c= V1[16] ? -$signed({1'b0,V1[15:0]}) : $signed(V1);
+    assign V2_2c = V2[16] ? -$signed({1'b0,V2[15:0]}) : $signed(V2); 
 
     always @ (posedge clock)
     begin
@@ -40,10 +40,10 @@ module Arth_module(
    
     assign add = V1_2c+V2_2c;
     assign nadd= -add;
-    assign ovwa=((V1[15]&V2[15])&!(add[15])) || ((!V1[15]&!V2[15])&add[15]); //Addition overflow if add a positive to a positive and get a negative, or add a negative to a negative and get a positive 
+    assign ovwa=((V1_2c[16]&V2_2c[16])&!(add[16])) || ((!V1_2c[16]&!V2_2c[16])&add[16]); //Addition overflow if add a positive to a positive and get a negative, or add a negative to a negative and get a positive 
     assign subtract = V2_2c-V1_2c;
     assign nsubtract = -subtract;
-    assign ovws=((V1[15]&!V2[15])&(add[15])) || ((!V1[15]&V2[15])&add[15]);  //Subtraction overflow if subtract a negative from a positive and get a negative, or subtract a positive from a negative and get a positive 
+    assign ovws=((V1_2c[16]&!V2_2c[16])&(add[16])) || ((!V1_2c[16]&V2_2c[16])&add[16]);  //Subtraction overflow if subtract a negative from a positive and get a negative, or subtract a positive from a negative and get a positive 
     
     assign {ovwm,multiply[15:0]}=V1[15:0]*V2[15:0];     //Multiply the magnitudes
     assign multiply[16]=V1[16]^V2[16];                  //XOR the sign bits
