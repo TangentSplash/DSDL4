@@ -46,7 +46,7 @@ module Arth_module(
     assign ovwa=((V1_2c[16]&V2_2c[16])&!(add[16])) || ((!V1_2c[16]&!V2_2c[16])&add[16]); //Addition overflow if add a positive to a positive and get a negative, or add a negative to a negative and get a positive 
     assign subtract = V2_2c-V1_2c;
     assign nsubtract = -subtract;
-    assign ovws=((V1_2c[16]&!V2_2c[16])&(add[16])) || ((!V1_2c[16]&V2_2c[16])&add[16]);  //Subtraction overflow if subtract a negative from a positive and get a negative, or subtract a positive from a negative and get a positive 
+    assign ovws=((V2_2c[16]&!V1_2c[16])&!(subtract[16])) || ((!V2_2c[16]&V1_2c[16])&subtract[16]);  //Subtraction overflow if subtract a negative from a positive and get a negative, or subtract a positive from a negative and get a positive 
     
     assign {multextra,multiply[15:0]}=V1[15:0]*V2[15:0];     //Multiply the magnitudes
     assign multiply[16]=V1[16]^V2[16];                  //XOR the sign bits
