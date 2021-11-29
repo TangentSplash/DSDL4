@@ -14,7 +14,7 @@ module TB_Calculator;
 		   .keycode(keycode),
 		   .ovw(ovw),
 		   .sign(sign),
-		   .value(TEMP_to_display_block)
+		   .value(value)
 		   );
    // Generate clock signal
    initial
