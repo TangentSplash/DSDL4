@@ -3,7 +3,12 @@ module Calculator(
     input clock,
     input reset,
     input newkey,			// High for one cycle during each new keypress
-    input [4:0] keycode 	// Key pressed
+    input [4:0] keycode, 	// Key pressed
+    output ovw,
+    output sign,
+    output [15:0] TEMP_to_display_block,
+    // output [7:0] segment
+    // output [7:0] digit
     ); 
 
 wire newhex,newop,eq;
