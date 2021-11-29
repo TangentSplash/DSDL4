@@ -5,7 +5,7 @@ module TB_Calculator;
    reg [4:0] keycode;
    // Outputs from modu1e being verified
    wire	     ovw, sign;
-   wire [15:0] TEMP_to_display_block;
+   wire [15:0] value;
    // Instantiate module
    Calculator uut (
 		   .clock(clock),
@@ -14,7 +14,7 @@ module TB_Calculator;
 		   .keycode(keycode),
 		   .ovw(ovw),
 		   .sign(sign),
-		   .TEMP_to_display_block(TEMP_to_display_block)
+		   .value(TEMP_to_display_block)
 		   );
    // Generate clock signal
    initial
@@ -42,10 +42,10 @@ module TB_Calculator;
 	// 3
 	#650  
 	  newkey = 1'b1;
-	keycode = 5b'10011;
+	keycode = 5'b10011;
 	#200 
 	  newkey = 1'b0;
-	keycode = 5b'00000;
+	keycode = 5'b00000;
 
 	// +
 	#1000 
@@ -200,10 +200,10 @@ module TB_Calculator;
         // 3
         #2000
           newkey = 1'b1;
-        keycode = 5b'10011;
+        keycode = 5'b10011;
         #200
           newkey = 1'b0;
-        keycode = 5b'00000;
+        keycode = 5'b00000;
 
 	// x
 	#1000
@@ -258,18 +258,18 @@ module TB_Calculator;
 	// 1
 	#2000
           newkey = 1'b1;
-        keycode = 5b'10001;
+        keycode = 5'b10001;
         #200
           newkey = 1'b0;
-        keycode = 5b'00000;
+        keycode = 5'b00000;
 
 	// 1
 	#1000
           newkey = 1'b1;
-        keycode = 5b'10001;
+        keycode = 5'b10001;
         #200
           newkey = 1'b0;
-        keycode = 5b'00000;
+        keycode = 5'b00000;
 
 	// x
         #1000
@@ -343,10 +343,10 @@ module TB_Calculator;
 	// 3
 	#2000
           newkey = 1'b1;
-        keycode = 5b'10011;
+        keycode = 5'b10011;
         #200
           newkey = 1'b0;
-	keycode = 5b'00000;
+	keycode = 5'b00000;
 
 	// -
         #1000
@@ -460,10 +460,10 @@ module TB_Calculator;
 	// 3                                                                                                                                                                                                             
         #2000
           newkey = 1'b1;
-        keycode = 5b'10011;
+        keycode = 5'b10011;
         #200
           newkey = 1'b0;
-        keycode = 5b'00000;
+        keycode = 5'b00000;
 
         // -                                                                                                                                                                                                             
         #1000
@@ -500,10 +500,10 @@ module TB_Calculator;
 	// 3                                                                                                                                                                                                     
         #1000
           newkey = 1'b1;
-        keycode = 5b'10011;
+        keycode = 5'b10011;
         #200
           newkey = 1'b0;
-        keycode = 5b'00000;
+        keycode = 5'b00000;
 
 	// =                                                                                                                                                                                                           
         #1000
