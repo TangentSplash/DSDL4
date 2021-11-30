@@ -1,11 +1,11 @@
 `timescale 1ns / 1ps
 module TB_Registers;
 	// Inputs to module being verified
-	reg clock, reset, newhex, newop, eq;
+	reg clock, reset, newhex, newop, eq, BS;
 	reg [3:0] hexcode;
-	reg [15:0] answer;
+	reg [16:0] answer;
 	// Outputs from module being verified
-	wire [15:0] V1_reg, V2_reg;
+	wire [16:0] V1curr, V2curr;
 	// Instantiate module
 	Registers uut (
 		.clock(clock),
@@ -13,11 +13,11 @@ module TB_Registers;
 		.newhex(newhex),
 		.hexcode(hexcode),
 		.newop(newop),
-		.opcode(opcode),
 		.eq(eq),
-		.ans(ans),
-		.V1_reg(V1_reg),
-		.V2_reg(V2_reg)
+		.BS(BS),
+		.answer(answer),
+		.V1curr(V1curr),
+		.V2curr(V2curr)
 		);
 	// Generate clock signal
 	initial
@@ -33,45 +33,61 @@ module TB_Registers;
 			newhex = 1'b0;
 			hexcode = 4'h0;
 			newop = 1'b0;
-			opcode = 2'h0;
 			eq = 1'b0;
-			ans = 16'h0;
-			#250
+			BS = 1'b0;
+			answer = 17'h0;
+			#200
 			reset = 1'b1;
 			#200
 			reset = 1'b0;
+			#200
+			newhex = 1'b1;
+			hexcode = 4'h3;
+			#200
+			newhex = 1'b0;
 			#400
 			newhex = 1'b1;
-			hexcode = 4'h5;
-			#1900
-			newhex = 1'b0;
-			#100
-			hexcode = 4'h0;
-			#1200
-			newhex = 1'b1;
-			hexcode = 4'h4;
-			#1700
+			hexcode = 4'h2;
+			#200
 			newhex = 1'b0;
 			hexcode = 4'h0;
 			#400
 			newop = 1'b1;
-			#800
+			#200
 			newop = 1'b0;
-			#700
-			hexcode = 4'h3;
-			#100
+			#400
 			newhex = 1'b1;
-			#1100
+			hexcode = 4'h1;
+			#200
 			newhex = 1'b0;
+			#600
+			newhex = 1'b1;
+			#200
+			newhex = 1'b0;
+			hexcode = 4'h0;
+			#400
+			eq = 1'b1;
+			answer = 17'h1A;
+			#200
+			eq = 1'b0;
 			#1000
 			newhex = 1'b1;
-			#1400
+			hexcode = 4'h5;
+			#200
 			newhex = 1'b0;
-			#1200
-			eq = 1'b1;
-			#2800
-			eq = 1'b0;
-			#384750
+			hexcode = 4'h0;
+			#400
+			newhex = 1'b1;
+			#200
+			newhex = 1'b0;
+			hexcode = 4'h0;
+			#400
+			BS = 1'b1;
+			#200
+			BS = 1'b0;
+			#435
+			newop = 1'b1;
+			#200
 			$stop;
 		end
 endmodule

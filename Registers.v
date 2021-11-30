@@ -23,20 +23,26 @@ module Registers(
      begin   
         if (reset)
           begin   
-             V1curr <= 17'h0000;
-             V2curr <= 17'h0000;
+             V1curr <= 17'd0;
+             V2curr <= 17'd0;
+             V1next <= 17'd0;
+             V2next <= 17'd0;
              FLOWMODEcurr <=1'b0;
+             FLOWMODEnext <=1'b0;
           end 
         else 
           begin
              V1curr <= V1next;
-             V2curr <= V2next;
+             if (newop) 
+                V2curr <= V1curr;
+             else
+                V2curr <= V2curr;
              FLOWMODEcurr <= FLOWMODEnext;
           end    
      end 
    
    //Flow Mode Module
-   always @ (FLOWMODEcurr)
+   always @ (newhex, eq, newop,FLOWMODEcurr)
      begin
         if (newhex)             FLOWMODEnext <= 1'b0;
         else if (eq | newop)    FLOWMODEnext <= 1'b1;
@@ -44,19 +50,22 @@ module Registers(
      end
    
    // V1 Instructions
-   always @ (V1curr)
+   always @ (eq,newhex,BS)
+     begin
+     if (eq|newhex|BS)
      begin
         if (eq)                             V1next <= answer;
         else if (FLOWMODEcurr && newhex)    V1next <= overwrite; // only overwrite if we get a new char
         else if (BS)                        V1next <= {4'b0, V1curr[15:4]}; // shift right is backspace
         else                                V1next <= {V1curr[16],V1curr[11:0], hexcode}; // shift left
+        end
      end
   
    // V2 Instructions
-   always @ (V2curr)
+   /*always @ (posedge clock)
      begin
-        if (newhex | eq)    V2next <= V1curr;
-        else                V2next <=V2curr;
-     end
+        if (newop)    V2next <= V1curr;
+        else          V2next <= V2curr;
+     end*/
    
 endmodule

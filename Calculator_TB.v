@@ -14,7 +14,7 @@ module TB_Calculator;
 		   .keycode(keycode),
 		   .ovw(ovw),
 		   .sign(sign),
-		   .value(TEMP_to_display_block)
+		   .value(value)
 		   );
    // Generate clock signal
    initial
@@ -691,7 +691,7 @@ module TB_Calculator;
         // -                             
         #1000
           newkey = 1'b1;
-        keycode = 5'b00010;
+        keycode = 5'b00011;
         #200
           newkey = 1'b0;
         keycode = 5'b00000;
@@ -715,7 +715,7 @@ module TB_Calculator;
           newkey = 1'b0;
         keycode = 5'b00000;
 
-        // +                                                                                                                                                                                                             
+        // x                                                                                                                                                                                                             
         #1000
           newkey = 1'b1;
         keycode = 5'b00010;
@@ -752,7 +752,7 @@ module TB_Calculator;
 	// +                                                                                                                                                                                                             
         #1000
           newkey = 1'b1;
-        keycode = 5'b00010;
+        keycode = 5'b01010;
         #200
           newkey = 1'b0;
         keycode = 5'b00000;
