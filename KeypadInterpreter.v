@@ -4,9 +4,10 @@ module keypad_interpreter(
     output newhex,          // High when a hexidecimal number is pressed
     output [3:0] hexcode,   // The hexidecimal number currently pressed
     output newop,            // High when an operator is pressed
-    output [1:0] opcode, 	// Operator currently being pressed
+    output reg [1:0] opcode, 	// Operator currently being pressed
     output eq,
-    output BS
+    output BS,
+    output CA
     );             // Equals is currently being pressed
 
     //Keypad Values
@@ -75,11 +76,11 @@ module keypad_interpreter(
         
         // ====== Hexidecimal Output Control ======
         
-        if (keycode[4])
+        /*if (keycode[4])
              hexcode = keycode[3:0];
         else    
              hexcode = 4'b0000;
-            
+            */
 end
            
 endmodule
