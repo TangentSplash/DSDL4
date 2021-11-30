@@ -145,7 +145,7 @@ module TB_Calculator;
           newkey = 1'b0;
         keycode = 5'b00000;
 	
-	// addtion 3B + F2 (should overflow (12D))
+	// addtion 3B + F2 (12D) + FF23(ovw 1004E)
 	
 	// 3 
 	#2000
@@ -195,6 +195,54 @@ module TB_Calculator;
           newkey = 1'b0;
         keycode = 5'b00000;
 
+	// +                                                                                                                                               
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b01010;
+        #200
+          newkey = 1'b0;
+	keycode = 5'b00000;
+	
+	// F
+	#1000
+	  newkey = 1'b1;
+	keycode = 5'b11111;
+	#200
+	  newkey = 1'b0;
+	keycode = 5'b00000;
+	
+	// F
+	#1000
+	  newkey = 1'b1;
+	keycode = 5'b11111;
+	#200
+	  newkey = 1'b0;
+	keycode = 5'b00000;
+	     
+	// 2                                                                                                                         
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b10010;
+        #200
+          newkey = 1'b0;
+        keycode = 5'b00000;
+
+        // 3                                                                                                                                                   
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b10011;
+        #200
+          newkey = 1'b0;
+        keycode = 5'b00000;
+	     
+	// = 	
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b00100;
+        #200
+          newkey = 1'b0;
+        keycode = 5'b00000;
+	     
 	// multiplication 3x2 (6) x 5 (1E)
 
         // 3
