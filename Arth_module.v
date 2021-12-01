@@ -5,13 +5,18 @@ module Arth_module(
     input [16:0] V2, //Sign and magnitude
     input [1:0] opcode,           
     input newop,
-    output reg [16:0] answer,    //Sign and magnitude
-    output reg ovw);
+    input newhex,
+    input eq,
+    output [16:0] answer,    //Sign and magnitude
+    output ovw_out);
 
-    reg [1:0] operator_curr,operator_next;  
-
+    reg [1:0] operator_curr;  
+    reg [16:0] Ianswer;
     wire signed [16:0] add, subtract;
     wire signed [16:0] V1_2c,V2_2c;
+    reg ovw;
+    reg omode_next;
+    reg omode_curr;
     
     wire [16:0] multiply;   //Multiplication of sign and magnitude is much easier
 
@@ -28,17 +33,45 @@ module Arth_module(
     always @ (posedge clock)
     begin
         if (reset)
-        begin
-            operator_curr <= 2'b00;
-            operator_next <= 2'b00;
-        end 
+            begin
+                operator_curr <= 2'b00;
+                omode_curr <= 1'd0;
+                ovw <= 1'b0;
+            end 
         else 
-        begin
-            operator_curr <= operator_next;
-        end
+            begin  
+                omode_curr <= omode_next;
+            
+                if (newop)
+                    operator_curr <= opcode;
+                else
+                    operator_curr <= operator_curr;
+                    
+                if (newop || newhex)
+                    ovw <= 1'b0;
+                else if (ovwa | ovwm | ovws)
+                    case (operator_curr) 
+                        2'b00: 
+                        begin 
+                            ovw <= ovwa;     //Calculation overflowed if addition overflowed
+                        end
+                        2'b01:
+                        begin
+                            ovw <= ovwm; //Did multiplication overflow?
+                        end 
+                        2'b10:
+                        begin
+                            ovw <= ovws; //Did subtraction overflow
+                        end
+                        default: 
+                        begin 
+                            ovw <= 1'b1; //Should not have invalid operator, show an overflow error
+                        end
+                    endcase 
+                else
+                    ovw <= ovw;
 
-        if (newop)
-            operator_next <= opcode;
+            end
     end
    
     assign add = V1_2c+V2_2c;
@@ -51,27 +84,34 @@ module Arth_module(
     assign {multextra,multiply[15:0]}=V1[15:0]*V2[15:0];     //Multiply the magnitudes
     assign multiply[16]=V1[16]^V2[16];                  //XOR the sign bits
     
-    always @ (V1, V2,operator_curr,add,subtract,multiply) 
+    always @ ( * ) 
         case (operator_curr)    //Answer depends on the selected operator
             2'b00: 
             begin 
-                answer = add[16] ? {1'b1,nadd[15:0]}: $unsigned(add);  //Convert back to sign and magnitude. If 2's complement is negative, set sign bit to 1 and set magnitude to negative of the remaining bits
-                ovw = ovwa;     //Calculation overflowed if addition overflowed
+                Ianswer = add[16] ? {1'b1,nadd[15:0]}: $unsigned(add);  //Convert back to sign and magnitude. If 2's complement is negative, set sign bit to 1 and set magnitude to negative of the remaining bits
             end
             2'b01:
             begin
-                answer = multiply;
-                ovw = ovwm; //Did multiplication overflow?
+                Ianswer = multiply;
             end 
             2'b10:
             begin
-                answer = subtract[16] ? {1'b1,nsubtract[15:0]} : $unsigned(subtract);  //If 2's complement is negative, set sign bit to 1 and set magnitude to negative of the remaining bits
-                ovw = ovws; //Did subtraction overflow
+                Ianswer = subtract[16] ? {1'b1,nsubtract[15:0]} : $unsigned(subtract);  //If 2's complement is negative, set sign bit to 1 and set magnitude to negative of the remaining bits
             end
             default: 
             begin 
-                answer = 4'h0;
-                ovw = 1'b1; //Should not have invalid operator, show an overflow error
+                Ianswer = 4'h0;
             end
         endcase 
+        
+    always @ (newhex, eq, newop, omode_curr)
+     begin
+        if (newhex || newop)             omode_next <= 1'b0;
+        else if (eq)                     omode_next <= 1'b1;
+        else                             omode_next <= omode_curr;
+     end
+     
+      assign answer = ovw ? 16'd0 : Ianswer;
+      assign ovw_out = omode_curr ? ovw : 1'b0;
+     
 endmodule

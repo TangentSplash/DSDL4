@@ -48,12 +48,14 @@ module TB_Calculator;
 	keycode = 5'b00000;
 
 	// +
-	#1000 
-	  newkey = 1'b1;
-	keycode = 5'b01010;
-	#200
-	  newkey = 1'b0;
-	keycode = 5'b00000;
+		#900
+            keycode = 5'b01010;
+        #100
+            newkey = 1'b1;
+        #200
+          newkey = 1'b0;
+        #200
+            keycode = 5'b00000;
 
 	// 2
 	#1000                                                                                                                                          
@@ -72,12 +74,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 	// +
-	#1000
-          newkey = 1'b1;
-        keycode = 5'b01010;
+		#900
+            keycode = 5'b01010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
 	// 5
 	#1000
@@ -114,12 +118,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 	// +                                                                                                                                               
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b01010;
+		#900
+            keycode = 5'b01010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-	keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
 	// 2                                                                                                                         
         #1000
@@ -164,12 +170,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
         // +
-	#1000
-          newkey = 1'b1;
-        keycode = 5'b01010;
+		#900
+            keycode = 5'b01010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
 	// F
 	#1000
@@ -196,12 +204,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 	// +                                                                                                                                               
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b01010;
+		#900
+            keycode = 5'b01010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-	keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 	
 	// F
 	#1000
@@ -254,15 +264,17 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 	// x
-	#1000
-          newkey = 1'b1;
-        keycode = 5'b00010;
+        #900
+            keycode = 5'b00010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
 	// 2
-        #1000
+        #2000
           newkey = 1'b1;
         keycode = 5'b10010;
         #200
@@ -278,12 +290,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 	// x
-	#1000
-          newkey = 1'b1;
-        keycode = 5'b00010;
+        #900
+            keycode = 5'b00010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
 	// 5
         #1000
@@ -318,14 +332,25 @@ module TB_Calculator;
         #200
           newkey = 1'b0;
         keycode = 5'b00000;
-
-	// x
-        #1000
+        
+        // 1
+	#1000
           newkey = 1'b1;
-        keycode = 5'b00010;
+        keycode = 5'b10001;
         #200
           newkey = 1'b0;
         keycode = 5'b00000;
+        
+
+	// x
+        #900
+            keycode = 5'b00010;
+        #100
+            newkey = 1'b1;
+        #200
+          newkey = 1'b0;
+        #200
+            keycode = 5'b00000;
 
 	// C
         #1000
@@ -334,7 +359,22 @@ module TB_Calculator;
         #200
           newkey = 1'b0;
         keycode = 5'b00000;
-
+        
+	// C
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b11100;
+        #200
+          newkey = 1'b0;
+        keycode = 5'b00000;
+        
+        	// C
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b11100;
+        #200
+          newkey = 1'b0;
+        keycode = 5'b00000;
 	// =
         #1000
           newkey = 1'b1;
@@ -363,12 +403,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 	// X
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b00010;
+        #900
+            keycode = 5'b00010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
         // F
 	#1000
@@ -397,12 +439,14 @@ module TB_Calculator;
 	keycode = 5'b00000;
 
 	// -
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b00011;
+		#900
+            keycode = 5'b00011;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
         // 2
 	#1000
@@ -421,7 +465,7 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 
-	//subt 3B - F2 (-B7) -F@ (should underflow (-1A9))
+	//subt 3B - F2 (-B7) -F2 (should underflow (-1A9))
 	       
 	// 3                                                                                                                                                                                                             
         #2000
@@ -440,12 +484,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
         // -                                                                                                                                                                                                             
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b00011;
+		#900
+            keycode = 5'b00011;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
         // F                                                                                                                                                                                                             
         #1000
@@ -472,12 +518,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 	// -                                                                                                                                                                                                     
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b00011;
+		#900
+            keycode = 5'b00011;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
         // F                                                                                                                                                                                                             
         #1000
@@ -486,6 +534,57 @@ module TB_Calculator;
         #200
           newkey = 1'b0;
         keycode = 5'b00000;
+
+        // 2                                                                                                                                                                                                             
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b10010;
+        #200
+          newkey = 1'b0;
+        keycode = 5'b00000;
+
+        // =                                                                                                                                                                                                             
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b00100;
+        #200
+          newkey = 1'b0;
+        keycode = 5'b00000;
+        
+        // -                                                                                                                                                                                                             
+		#900
+            keycode = 5'b00011;
+        #100
+            newkey = 1'b1;
+        #200
+          newkey = 1'b0;
+        #200
+            keycode = 5'b00000;
+
+        // F                                                                                                                                                                                                             
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b11111;
+        #200
+          newkey = 1'b0;
+        keycode = 5'b00000;
+        
+        // F                                                                                                                                                                                                             
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b11111;
+        #200
+          newkey = 1'b0;
+        keycode = 5'b00000;
+        
+        // F                                                                                                                                                                                                             
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b11111;
+        #200
+          newkey = 1'b0;
+        keycode = 5'b00000;
+        
 
         // 2                                                                                                                                                                                                             
         #1000
@@ -513,13 +612,15 @@ module TB_Calculator;
           newkey = 1'b0;
         keycode = 5'b00000;
 
-        // -                                                                                                                                                                                                             
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b00011;
+        // -  
+					#900
+            keycode = 5'b00011;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
         // 1                                                                                                                                                                                                             
         #1000
@@ -538,12 +639,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 	// X                                                                                                                                                                                                     
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b00010;
+        #900
+            keycode = 5'b00010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
 	// 3                                                                                                                                                                                                     
         #1000
@@ -562,12 +665,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 	// -                                                                                                                                                                                                          
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b00011;
+		#900
+            keycode = 5'b00011;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
         // 8
         #1000
@@ -586,12 +691,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 	// +                                                                                                                                                                                                            
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b01010;
+		#900
+            keycode = 5'b01010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
         // 5                
         #1000
@@ -663,12 +770,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 	
 	// +                                                                                                                                                                                                             
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b01010;
+		#900
+            keycode = 5'b01010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
 	// =                                                                                                                                                                                                            
         #1000
@@ -689,12 +798,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
         // -                             
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b00011;
+		#900
+            keycode = 5'b00011;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
         // =                                                                                                                                                                                                             
         #1000
@@ -715,13 +826,15 @@ module TB_Calculator;
           newkey = 1'b0;
         keycode = 5'b00000;
 
-        // x                                                                                                                                                                                                             
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b00010;
+        //x                      
+		#900
+            keycode = 5'b00010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;;
 
         // =                                                                                                                                                                                                             
         #1000
@@ -750,12 +863,14 @@ module TB_Calculator;
         keycode = 5'b00000;
 
 	// +                                                                                                                                                                                                             
-        #1000
-          newkey = 1'b1;
-        keycode = 5'b01010;
+		#900
+            keycode = 5'b01010;
+        #100
+            newkey = 1'b1;
         #200
           newkey = 1'b0;
-        keycode = 5'b00000;
+        #200
+            keycode = 5'b00000;
 
 	
 	// 5                                                                                                                                                                                                           
@@ -781,6 +896,67 @@ module TB_Calculator;
         #200
           newkey = 1'b0;
         keycode = 5'b00000;
+        
+        // CA                                                                                                                                                                                                           
+        #1000
+          newkey = 1'b1;
+        keycode = 5'b01001;
+        #200
+          newkey = 1'b0;
+        keycode = 5'b00000;
+        
+        	// 5                                                                                                                                                                                                             
+            #1000
+              newkey = 1'b1;
+            keycode = 5'b10101;
+            #200
+              newkey = 1'b0;
+            keycode = 5'b00000;
+    
+        // +                                                                                                                                                                                                             
+            #900
+                keycode = 5'b01010;
+            #100
+                newkey = 1'b1;
+            #200
+              newkey = 1'b0;
+            #200
+                keycode = 5'b00000;
+    
+        
+        // 4                                                                                                                                                                                                           
+            #1000
+              newkey = 1'b1;
+            keycode = 5'b10100;
+            #200
+              newkey = 1'b0;
+            keycode = 5'b00000;
+            
+            //CE
+            #1000
+              newkey = 1'b1;
+            keycode = 5'b01100;
+            #200
+              newkey = 1'b0;
+            keycode = 5'b00000;
+        
+        //3
+        newkey = 1'b1;
+      keycode = 5'b10011;
+      #200
+        newkey = 1'b0;
+      keycode = 5'b00000;
+      
+      
+          // =                                                                                                                                                                                                          
+              #1000
+                newkey = 1'b1;
+              keycode = 5'b00100;
+              #200
+                newkey = 1'b0;
+              keycode = 5'b00000;
+        
+        
 
 
 	

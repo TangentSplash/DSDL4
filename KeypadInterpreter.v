@@ -7,7 +7,8 @@ module keypad_interpreter(
     output reg [1:0] opcode, 	 //Operator currently being pressed
     output eq,
     output BS,
-    output CA
+    output CA,
+    output CE
     );              //Equals is currently being pressed
 
     //Keypad Values
@@ -22,7 +23,8 @@ module keypad_interpreter(
     localparam [4:0] SUBKEY = 5'b00011;
     localparam [4:0] MULTKEY = 5'b00010;
     localparam [4:0] BACKKEY = 5'b00001;
-    localparam [4:0] CAKEY = 5'b00011;
+    localparam [4:0] CAKEY = 5'b01001;
+    localparam [4:0] CEKEY = 5'b01100;
     localparam [4:0] EQUALS = 5'b00100;
     
     //Opcode output Values
@@ -36,6 +38,7 @@ module keypad_interpreter(
     assign hexcode = keycode[3:0];
     assign BS = (keycode==BACKKEY)&& newkey;
     assign CA = (keycode==CAKEY) && newkey;
+    assign CE = (keycode==CEKEY) && newkey;
     
     /*
     always @ () begin

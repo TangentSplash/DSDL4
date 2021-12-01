@@ -15,7 +15,8 @@
 module CalculatorTest(
         input clk100,        // 100 MHz clock from oscillator on board
         input rstPBn,        // reset signal, active low, from CPU RESET pushbutton
-        input [3:0] kpcol,   // signal from keypad
+        input [5:0] kpcol,   // signal from keypad
+        output [3:0] kprow,       // drives keyad rows, 0 on top
         output [7:0] digit,  // digit controls - active low (7 on left, 0 on right)
         output [7:0] segment,// segment controls - active low (a b c d e f g p)
         output overflow,     // overflow warning signal
@@ -26,7 +27,6 @@ module CalculatorTest(
 // Internal Signals
     wire clk5;              // 5 MHz clock signal, buffered
     wire reset;             // internal reset signal, active high
-    wire [3:0] kprow;       // drives keyad rows, 0 on top
     wire newkey;
     wire [4:0] keycode;
     wire [15:0] value;
@@ -45,7 +45,7 @@ module CalculatorTest(
     keypad keypad (.clk(clk5),.rst(reset),.kpcol(kpcol),.kprow(kprow),.newkey(newkey),.keycode(keycode));
 // ==================================================================================
 // Instantiate display interface
-    top display(.clock(clk5),.reset(reset),.value(count),.dots(0000),.segment(segment),.digit(digit) ); //Badly named display module from previous assignment
+    top display(.clock(clk5),.reset(reset),.value(value),.dots(0000),.segment(segment),.digit(digit) ); //Badly named display module from previous assignment
 
 // ===========================================================================
 // Instantiate Calculator
