@@ -22,7 +22,7 @@ module keypad_interpreter(
     localparam [4:0] SUBKEY = 5'b00011;
     localparam [4:0] MULTKEY = 5'b00010;
     localparam [4:0] BACKKEY = 5'b00001;
-    localparam [4:0] CAKEY = 5'b00011;
+    localparam [4:0] CAKEY = 5'b01001;
     localparam [4:0] EQUALS = 5'b00100;
     
     //Opcode output Values
