@@ -22,8 +22,8 @@ module Arth_module(
    reg				 omode_next;    // [ OverflowMode register
    reg				 omode_curr;    // to check in equals has been pressed ]
    wire				 ovwa,ovws;     // internal wire for add/sub overflows
-   wire [16:0]			 multextra;     // @@@@ NB: why are these 2 wires? @@@@
-   wire				 ovwm = |multextra;
+   wire [16:0]			 multextra;     // Extra bits to capture possible multiplication overflow
+   wire				 ovwm = |multextra; // If any of these bits are non-zero there has been a multiplication overflow
    
    wire signed [16:0]		 nadd, nsubtract;
     

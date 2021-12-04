@@ -13,7 +13,7 @@ wire newhex,newop,eq;
 wire [3:0] hexcode;
 wire [1:0] opcode;
 wire [16:0] ans,V1,V2;  //17 bit sign and magnitude integers with 17th bit representing sign
-wire BS,flowmode;
+wire BS,flowmode,CA,CE;
 
 wire rst;
 assign rst = reset | CA;
