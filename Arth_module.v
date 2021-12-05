@@ -20,9 +20,9 @@ module Arth_module(
   
    reg				 ovw;           // Internal overflow register
    reg				 omode_next;    // [ OverflowMode register
-   reg				 omode_curr;    // to check in equals has been pressed ]
+   reg				 omode_curr;    // to check if equals has been pressed ]
    wire				 ovwa,ovws;     // internal wire for add/sub overflows
-   wire [16:0]			 multextra;     // Extra bits to capture possible multiplication overflow
+   wire [15:0]			 multextra;     // Extra bits to capture possible multiplication overflow
    wire				 ovwm = |multextra; // If any of these bits are non-zero there has been a multiplication overflow
    
    wire signed [16:0]		 nadd, nsubtract;
@@ -151,7 +151,7 @@ module Arth_module(
    assign answer = ovw ? 16'd0 : Ianswer;
    // an overflow will display zereos on screen
    
-   assign ovw_out = omode_curr ? ovw : 1'b0;
+   assign ovw_out = omode_curr && ovw;
    // overflow only visible when overflowmode is one
    
 endmodule
