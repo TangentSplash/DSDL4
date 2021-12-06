@@ -1,0 +1,32 @@
+Operator codes:
+Add: a
+Multiply: 2
+Subtract: 3
+
+Value 1 0003, operator 'a' Value 2 0002 = value 0005 with sign 0 and overflow 0
+operator 'a' Value 2 0005 = value 000a with sign 0 and overflow 0
+Value 1 003b, operator 'a' Value 2 0023 = value 005e with sign 0 and overflow 0
+Value 1 003b, operator 'a' Value 2 00f2 = value 012d with sign 0 and overflow 0
+operator 'a' Value 2 ff23 = value 0000 with sign 0 and overflow 1
+Value 1 0003, operator '2' Value 2 0002 = value 0006 with sign 0 and overflow 0
+operator '2' Value 2 0005 = value 001e with sign 0 and overflow 0
+Value 1 0111, operator '2' Value 2 0ccc = value 0000 with sign 0 and overflow 1
+Value 1 003b, operator '2' Value 2 000f = value 0375 with sign 0 and overflow 0
+Value 1 0003, operator '3' Value 2 0002 = value 0001 with sign 0 and overflow 0
+Value 1 003b, operator '3' Value 2 00f2 = value 00b7 with sign 1 and overflow 0
+operator '3' Value 2 00f2 = value 01a9 with sign 1 and overflow 0
+operator '3' Value 2 fff2 = value 0000 with sign 0 and overflow 1
+Value 1 0003, operator '3' Value 2 0001 = value 0002 with sign 0 and overflow 0
+operator '2' Value 2 0003 = value 0006 with sign 0 and overflow 0
+operator '3' Value 2 0008 = value 0002 with sign 1 and overflow 0
+operator 'a' Value 2 0005 = value 0003 with sign 0 and overflow 0
+Value 1 fffe, operator 'a' Value 2 0001 = value ffff with sign 0 and overflow 0
+Value 1 003b, operator '2' Value 2 00f2 = value 37c6 with sign 0 and overflow 0
+Value 1 0042, operator '3' Value 2 10f4 = value 10b2 with sign 1 and overflow 0
+operator '2' Value 2 0065 = value 0000 with sign 0 and overflow 1
+Value 1 9876, operator 'a' Value 2 0022 = value 9898 with sign 0 and overflow 0
+operator '3' Value 2 dacf = value 4237 with sign 1 and overflow 0
+operator 'a' Value 2 0090 = value 41a7 with sign 1 and overflow 0
+operator '2' Value 2 0011 = value 0000 with sign 0 and overflow 1
+operator 'a' Value 2 0021 = value 0021 with sign 0 and overflow 0
+Finished with no errors

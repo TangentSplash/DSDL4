@@ -9,52 +9,73 @@
 // and is only used in the testbench for calculating the expected value.
 
 // Each line contains one calculation to be checked, including an optional first operator,
-// then and operand and a second operator.
+// then and operand and a second operator. This is then followed by sign magnitude and wheter there should
+// be an overflow in the answer 
+
+
+//=========How the data is formatted=======================================================================
+//Control info   Number 1    Operator    Number 2   | Answer: Sign Value Overflow 
+//for testbench                                     |
+//      0        0003         A          0002                  0    0005    0
+//This is then compressed to a continuos series of characters that can be read into the testbench in one go
 
 // addition 3+2 (5) then add 5 (A)
-
-//Control info   Number 1    Operator    Number 2
-//for testbench
-//_----_----
-  00003A0002
-//_----__---- 
+00003A0002000050
 
 // This is a 
 //continuation of the 
 //previous calculation
-10000A0005
+10000A00050000A0
 
 // addition 3B + 23 (should be 5E)
-0003BA0023
+0003BA00230005E0
 
 // addtion 3B + F2 (12D) + FF23(overflow)
-0003BA00F2
-10000AFF23
+0003BA00F20012D0
+10000AFF23000001
 
 // multiplication 3x2 (6) x 5 (1E)
-0000320002
-1000020005
+0000320002000060
+10000200050001E0
 
 // multiplication 111xCCC (ovw)
-0011120ccc
+0011120ccc000001
 
 // mult 3B x F (should be 375)
-0003B2000F
+0003B2000F003750
 
 // subt 3 - 2 (1)
-0000330002
+0000330002000010
 
 //subt 3B - F2 (-B7) -F2 (-1A9) - FFF2 (underflow)
-0003B300F2
-10000300F2
-100003FFF2
+0003B300F2100B70
+10000300F2101A90
+100003FFF2000001
 
 // some mixed operations 3-1 (2) x 3 (6) - 8 (-2) + 5 (3)
-0000320001
-1000020003
-1000030008
-10000A0005
+0000330001000020
+1000020003000060
+1000030008100020
+10000A0005000030
 
-0003B200F2
+// Getting close to, but not overflowing
+// Add FFFE + 1 (FFFF)
+0FFFEA00010FFFF0
+
+// Multiply 3B * F2 (37C0)
+0003B200F2037C60
+
+// More negative and overflow tests
+
+// 42 - 10F4 (-10B2) * 65 (ovw) 
+00042310F4110B20
+1000020065000001
+
+//9876 + 22(9898) - DACF (-4237) + 90 (-41A7) * 11 (ovw) + 21
+09876A0022098980
+100003DACF142370
+10000A0090141A70
+1000020011000001
+10000A0021000210
 
 

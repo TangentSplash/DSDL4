@@ -63,7 +63,7 @@ module Arth_module(
 	 if (newop || newhex) ovw <= 1'b0; // newop or newhex end the overflow
 
 	 // Assign the correct overflow if one occurs
-	 else if (ovwa | ovwm | ovws)  
+	 else if ((ovwa | ovwm | ovws) && !omode_curr)  
            case (operator_curr) 
              2'b00:   ovw <= ovwa; // Calculation overflowed if addition overflowed
              2'b01:   ovw <= ovwm; // Did multiplication overflow?
