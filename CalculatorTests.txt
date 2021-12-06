@@ -1,0 +1,60 @@
+//File with tests to be carried out by the testbench
+//Operator Values
+// ADD:      A
+// MULTIPLY: 2 
+// SUBTRACT: 3
+
+// The first digit is control information for the testbench telling it (0), this is a new calculation or
+// (1) this is a continuation of the previous calculation. This information is NOT passed onto the harware
+// and is only used in the testbench for calculating the expected value.
+
+// Each line contains one calculation to be checked, including an optional first operator,
+// then and operand and a second operator.
+
+// addition 3+2 (5) then add 5 (A)
+
+//Control info   Number 1    Operator    Number 2
+//for testbench
+//_----_----
+  00003A0002
+//_----__---- 
+
+// This is a 
+//continuation of the 
+//previous calculation
+10000A0005
+
+// addition 3B + 23 (should be 5E)
+0003BA0023
+
+// addtion 3B + F2 (12D) + FF23(overflow)
+0003BA00F2
+10000AFF23
+
+// multiplication 3x2 (6) x 5 (1E)
+0000320002
+1000020005
+
+// multiplication 111xCCC (ovw)
+0011120ccc
+
+// mult 3B x F (should be 375)
+0003B2000F
+
+// subt 3 - 2 (1)
+0000330002
+
+//subt 3B - F2 (-B7) -F2 (-1A9) - FFF2 (underflow)
+0003B300F2
+10000300F2
+100003FFF2
+
+// some mixed operations 3-1 (2) x 3 (6) - 8 (-2) + 5 (3)
+0000320001
+1000020003
+1000030008
+10000A0005
+
+0003B200F2
+
+

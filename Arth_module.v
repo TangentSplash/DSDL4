@@ -85,14 +85,14 @@ module Arth_module(
 
    // Addition block 
    assign add = V1_2c+V2_2c;       // standard addition
-   assign nadd= -add;              // negative add wire
+   assign nadd= -add;              // negative of the add wire (used for conversion)
    assign ovwa=((V1_2c[16]&V2_2c[16])&!(add[16])) || ((!V1_2c[16]&!V2_2c[16])&add[16]); // addition overflow 
    // [ Addition overflow if add a positive to a positive and get a negative,
    //   or add a negative to a negative and get a positive ] 
 
    // Subtraction block
    assign subtract = V2_2c-V1_2c;  // standard subtraction
-   assign nsubtract = -subtract;   // negative subraction wire
+   assign nsubtract = -subtract;   // negative of the subraction wire (used for conversion)
    assign ovws=((V2_2c[16]&!V1_2c[16])&!(subtract[16])) || ((!V2_2c[16]&V1_2c[16])&subtract[16]); // sub overflow
    // [ Subtraction overflow if subtract a negative from a positive and get a negative, 
    //   or subtract a positive from a negative and get a positive ] 
